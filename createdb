@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+#This file deletes the previous database and creates a new one with the same format, then puts the data in it. 
+
+#Throws erros if any issues in subsequent lines
+
+#remove the data base file
+rm -rf databaseWeather/projWeather.sqlite3
+
+#Sets schema for database
+sqlite3 databaseWeather/projWeather.sqlite3 < sqlWeather/schemaWeather.sql
+
+#Puts data in database
+sqlite3 databaseWeather/projWeather.sqlite3 < sqlWeather/dataWeather.sql
